@@ -129,4 +129,25 @@ class Trabajador
 			die($e->getMessage());
 		}
 	}
+
+
+	public function ObtenerCumpleaños()
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM trabajadores WHERE MONTH(fechaNacimiento)=MONTH(NOW())");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+
 }

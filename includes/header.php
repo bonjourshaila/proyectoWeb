@@ -25,6 +25,10 @@
         <li class="nav-item">
           <a href="?c=Trabajador&a=Index&m=Trabajador" class="navbar-brand">Trabajadores</a>
         </li>
+				<li class="nav-item">
+          <a href="?c=Trabajador&a=Cumpleaños&m=Trabajador" class="navbar-brand">Cumpleaños</a>
+        </li>
+			</ul>
     </div>
   </div>
 </nav>

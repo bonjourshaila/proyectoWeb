@@ -50,4 +50,12 @@ class TrabajadorControlador{
         $this->model->Eliminar($_REQUEST['id']);
         header('Location: index.php?c=Trabajador&m=Trabajador');
     }
+
+
+    public function Cumpleaños(){
+
+        require_once 'includes/header.php';
+        require_once 'TRABAJADORES/vista/trabajadorCumpleañosVista.php';
+        require_once 'includes/footer.php';
+    }
 }
