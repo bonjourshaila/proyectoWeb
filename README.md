@@ -11,3 +11,6 @@ Pasos para implementar el proyecto:
 Nota: En la conexión a la base de datos yo especifico el puerto, sino es el puerto que usted esta utilizando para mysql, tal vez marque error, colocar el puerto correspondiente. 
 
 $pdo = new PDO("mysql:host=localhost;dbname=softurasolutions;port=3308", "root", "");
+
+Añadir trabajadores con fechas de nacimiento, con mes del año actual para que aparezcan en la ventana de cumpleaños.
+
