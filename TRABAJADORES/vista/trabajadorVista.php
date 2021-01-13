@@ -1,3 +1,6 @@
+<script src="TRABAJADORES/vista/js/trabajador.js.php" type="text/javascript" charset="utf-8" async defer></script>
+
+
 <div class="container-fluid p-4">
   <div class="row">
     <div class="col-md-10 mx-auto">
@@ -37,7 +40,9 @@
                       <a href="?c=Trabajador&a=Crud&m=Trabajador&id=<?php echo $r->id; ?>" class="btn btn-warning"> Editar</a>
                   </td>
                   <td>
-                      <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Trabajador&a=Eliminar&m=Trabajador&id=<?php echo $r->id; ?>" class="btn btn-danger"> Eliminar</a>
+                    <a class="btn btn-danger" onclick="eliminar('<?php echo $r->id; ?>')" > Eliminar</a>
+
+                      <!-- <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Trabajador&a=Eliminar&m=Trabajador&id=< ?php echo $r->id; ?>" class="btn btn-danger"> Eliminar</a> -->
                   </td>
               </tr>
           <?php endforeach; ?>

@@ -16,12 +16,14 @@
 
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-		<a class="navbar-brand" href="#">Softura Solutions </a>
+		<a class="navbar-brand" href="#">
+			<img src="includes/img/logo_2_softura.png" alt="" width="120" height="50">
+		</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a href="?c=Alumno&a=Index&m=Alumno" class="navbar-brand">Trabajadores</a>
+          <a href="?c=Trabajador&a=Index&m=Trabajador" class="navbar-brand">Trabajadores</a>
         </li>
     </div>
   </div>

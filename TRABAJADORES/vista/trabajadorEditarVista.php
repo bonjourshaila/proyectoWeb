@@ -9,12 +9,12 @@
 
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li><a href="?c=Alumno&m=Alumno">Trabajadores /  </a></li>
+          <li><a href="?c=Trabajador&m=Trabajador">Trabajadores /  </a></li>
           <li class="active"><?php echo $alm->id != null ? $alm->nombre : ' Nuevo registro'; ?></li>
         </ol>
       </nav>
 
-      <form id="frm-alumno" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
+      <form id="frm-trabajador" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo $alm->id; ?>" />
 
         <div class="form-group mb-3">
