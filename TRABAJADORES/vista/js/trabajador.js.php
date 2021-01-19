@@ -1,3 +1,16 @@
+$().ready(()=>{
+  $("#frm-alumno").submit(function(){
+      return $(this).validate();
+  });
+});
+
+
+const verModal=()=>{
+    $('#modalCumpleaños').modal('show');
+}
+
+
+
 
 
 function eliminar(id){
@@ -13,12 +26,23 @@ function eliminar(id){
     confirmButtonText: 'Si, eliminalo.'
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location.href="?c=Trabajador&a=Eliminar&m=Trabajador&id="+id;
+
       Swal.fire(
-        'Eliminado',
-        'El registro ha sido eliminado',
-        'success'
-      )
+          {
+            title: 'Eliminado',
+      			html: 'El registro ha sido eliminado',
+      			icon: 'success',
+      			showCancelButton: false,
+      			confirmButtonColor: '#1B396A',
+      			confirmButtonText: 'Aceptar',
+                  allowOutsideClick: true
+      		}
+        )
+      .then(() => {
+            window.location.href="?c=Trabajador&a=Eliminar&m=Trabajador&id="+id;
+        });
+
+
     } else {
       window.location.href="?c=Trabajador&a=Index&m=Trabajador";
     }

@@ -69,10 +69,10 @@
 
 
 
-<script>
+<!-- <script>
     $(document).ready(function(){
         $("#frm-alumno").submit(function(){
             return $(this).validate();
         });
     })
-</script>
+</script> -->

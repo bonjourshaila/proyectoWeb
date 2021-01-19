@@ -1,10 +1,10 @@
-<script src="TRABAJADORES/vista/js/trabajador.js.php" type="text/javascript" charset="utf-8" async defer></script>
+<!-- <script src="TRABAJADORES/vista/js/trabajador.js.php" type="text/javascript" charset="utf-8" async defer></script> -->
 
 
 <div class="container-fluid p-4">
   <div class="row">
     <div class="col-md-10 mx-auto">
-  <div class="card">
+  <div class="card" id="carta">
     <h1 class="card-header">Trabajadores</h1>
     <div class="card-body">
       <div >
