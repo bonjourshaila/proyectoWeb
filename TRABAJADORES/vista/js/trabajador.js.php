@@ -12,15 +12,15 @@ function eliminar(id){
     cancelButtonText: 'Cancelar',
     confirmButtonText: 'Si, eliminalo.'
   }).then((result) => {
-
-  window.location.href="?c=Trabajador&a=Eliminar&m=Trabajador&id="+id;
-    return
     if (result.isConfirmed) {
+      window.location.href="?c=Trabajador&a=Eliminar&m=Trabajador&id="+id;
       Swal.fire(
         'Eliminado',
         'El registro ha sido eliminado',
         'success'
       )
+    } else {
+      window.location.href="?c=Trabajador&a=Index&m=Trabajador";
     }
   })
 
