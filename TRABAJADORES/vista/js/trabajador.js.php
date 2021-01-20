@@ -2,6 +2,53 @@ $().ready(()=>{
   $("#frm-alumno").submit(function(){
       return $(this).validate();
   });
+
+
+  $("#btn-guardar").on("click",()=>{
+    agregar();
+  });
+
+
+  function agregar() {
+    $.get("?c=Trabajador&a=Guardar&m=Trabajador&operacion=actualizar", $("#frm-trabajador").serialize()
+    )
+    .done((resultado)=>{
+        resultado=JSON.parse(resultado);
+        if (resultado.status) {
+          Swal.fire(
+            {
+              title: 'Guardado',
+                  html: resultado.mensaje,
+                  icon: 'success',
+                  showCancelButton: false,
+                  confirmButtonColor: '#1B396A',
+                  confirmButtonText: 'Aceptar',
+                    allowOutsideClick: true
+              }
+          );
+          $("input").val("");
+
+        }else{
+           Swal.fire(
+            {
+              title: 'Error de validación',
+                  html: resultado.mensaje,
+                  icon: 'error',
+                  showCancelButton: false,
+                  confirmButtonColor: '#1B396A',
+                  confirmButtonText: 'Aceptar',
+                    allowOutsideClick: true
+              }
+          );
+         }
+    })
+    .fail(()=>{
+      notificacion('Hubo un error en la conexión con el servidor','danger');
+    });
+  }
+
+  
+
 });
 
 

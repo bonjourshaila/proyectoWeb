@@ -1,16 +1,82 @@
 <?php
-class Trabajador
+class TrabajadorModelo
 {
 	private $pdo;
 
-    public $id;
-    public $nombre;
-    public $apellidoPaterno;
-    public $apellidoMaterno;
-    public $correo;
-    public $telefono1;
-    public $telefono2;
-    public $fechaNacimiento;
+    private $id;
+    private $nombre;
+    private $apellidoPaterno;
+    private $apellidoMaterno;
+    private $correo;
+    private $telefono1;
+    private $telefono2;
+    private $fechaNacimiento;
+
+
+	public function setId($id='') {
+		$this->id=$id;
+	}
+
+	public function getId() {
+		return $this->id;
+	}
+
+	public function setNombre($nombre='') {
+		$this->nombre=$nombre;
+	}
+
+	public function getNombre() {
+		return $this->nombre;
+	}
+
+	public function setApellidoPaterno($apellidoPaterno='') {
+		$this->apellidoPaterno=$apellidoPaterno;
+	}
+
+	public function getApellidoPaterno() {
+		return $this->apellidoPaterno;
+	}
+
+	public function setApellidoMaterno($apellidoMaterno='') {
+		$this->apellidoMaterno=$apellidoMaterno;
+	}
+
+	public function getApellidoMaterno() {
+		return $this->apellidoMaterno;
+	}
+
+	public function setCorreo($correo='') {
+		$this->correo=$correo;
+	}
+
+	public function getCorreo() {
+		return $this->correo;
+	}
+
+	public function setTelefono1($telefono1='') {
+		$this->telefono1=$telefono1;
+	}
+
+	public function getTelefono1() {
+		return $this->telefono1;
+	}
+
+	public function setTelefono2($telefono2='') {
+		$this->telefono2=$telefono2;
+	}
+
+	public function getTelefono2() {
+		return $this->telefono2;
+	}
+
+	public function setFechaNacimiento($fechaNacimiento='') {
+		$this->fechaNacimiento=$fechaNacimiento;
+	}
+
+	public function getFechaNacimiento() {
+		return $this->fechaNacimiento;
+	}
+
 
 
 	public function __CONSTRUCT()
@@ -105,7 +171,7 @@ class Trabajador
 		}
 	}
 
-	public function Registrar(Trabajador $data)
+	public function Registrar(TrabajadorModelo $data)
 	{
 		try
 		{
