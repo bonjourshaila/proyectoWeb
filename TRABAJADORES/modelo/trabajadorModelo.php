@@ -11,6 +11,7 @@ class TrabajadorModelo
     private $telefono1;
     private $telefono2;
     private $fechaNacimiento;
+		private $filtro;
 
 
 	public function setId($id='') {
@@ -77,6 +78,14 @@ class TrabajadorModelo
 		return $this->fechaNacimiento;
 	}
 
+	public function setFiltro($filtro='') {
+		$this->filtro=$filtro;
+	}
+
+	public function getFiltro() {
+		return $this->filtro;
+	}
+
 
 
 	public function __CONSTRUCT()
@@ -107,6 +116,34 @@ class TrabajadorModelo
 			die($e->getMessage());
 		}
 	}
+
+
+		public function ListarFiltro($filtro)
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("SELECT *
+																	FROM trabajadores
+																	WHERE nombre LIKE '%".$filtro."%' OR
+																				apellidoPaterno LIKE '%".$filtro."%' OR
+																				apellidoMaterno LIKE '%".$filtro."%' OR
+																				correo LIKE '%".$filtro."%' OR
+																				telefono1 LIKE '%".$filtro."%' OR
+																				telefono2 LIKE '%".$filtro."%' OR
+																				fechaNacimiento LIKE '%".$filtro."%'");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
 
 	public function Obtener($id)
 	{
