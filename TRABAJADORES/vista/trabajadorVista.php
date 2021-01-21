@@ -17,10 +17,10 @@
                     </li>
                   </ul>
                   <form class="d-flex" id="frm-filtro" action="?c=Trabajador&a=ListarFiltro&m=Trabajador" method="post">
-                    <input name="filtro" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button class="btn btn-outline-primary pl-1" type="submit">Buscar</button>
+                    <input name="filtro" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
                   </form>
-                  <a class="btn btn-outline-primary pl-1" href="?c=Trabajador&a=Index&m=Trabajador"> Mostrar todos</a>
+                  <a class="btn btn-outline-primary " style="margin-left: 10px" href="?c=Trabajador&a=Index&m=Trabajador"> Mostrar todos</a>
                 </div>
               </div>
             </nav>
@@ -37,6 +37,7 @@
                 <th style="width:120px;">Nacimiento</th>
                 <th style="width:60px;"></th>
                 <th style="width:60px;"></th>
+                <th style="width:60px;"></th>
               </tr>
             </thead>
             <tbody>
@@ -47,6 +48,12 @@
                   <td><?php echo $r->telefono1; ?></td>
                   <td><?php echo $r->telefono2; ?></td>
                   <td><?php echo $r->fechaNacimiento; ?></td>
+                  <td>
+
+                    <!-- <a  href="?c=Trabajador&a=ListarTelefonos&m=Trabajador&id=< ?php echo $r->id; ?>&nombre=< ?php echo $r->nombre . ' ' . $r->apellidoPaterno . ' ' . $r->apellidoMaterno; ?>"  class="btn btn-primary"> Telefonos</a> -->
+
+                    <a  onclick="verModalTel('<?php echo $r->nombre . ' ' . $r->apellidoPaterno . ' ' . $r->apellidoMaterno; ?>', '<?php echo $r->id; ?>')" class="btn btn-primary"> Telefonos</a>
+                  </td>
                   <td>
                     <a href="?c=Trabajador&a=EditarAgregar&m=Trabajador&id=<?php echo $r->id; ?>" class="btn btn-warning"> Editar</a>
                   </td>
@@ -69,4 +76,162 @@
   </div>
 
 
+</div>
+
+<!-- MODAL TELEFONO -->
+
+<div class="modal fade example-modal-lg" id="modalTel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xxx modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">TELEFONOS - <span id="span-nombre"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <a class="btn btn-primary" href="?c=Trabajador&a=EditarAgregar&m=Trabajador">Nuevo telefono</a>
+        <hr>
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="width:400px;">Telefono</th>
+              <th>Tipo</th>
+              <th style="width:60px;"></th>
+              <th style="width:60px;"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody-tels">
+
+              <!-- <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <a  onclick="verFormTel()" class="btn btn-warning"> Editar</a>
+                </td>
+                <td>
+                  <a class="btn btn-danger" onclick="eliminar('< ?php echo $r->id; ?>')" > Eliminar</a>
+
+                  <! - - <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=Trabajador&a=Eliminar&m=Trabajador&id=< ?php echo $r->id; ?>" class="btn btn-danger"> Eliminar</a> -->
+                <!-- </td>
+              </tr> -->
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal EDITAR telefono -->
+
+<div class="modal fade example-modal-lg" id="modalFormEditarTel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xxx modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form id="frm-editar-telefono" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
+
+
+          <input type="hidden" name="idTelefono" value="" id="hidden-idTel">
+
+
+          <div class="form-group mb-3">
+            <label>Telefono</label>
+            <input type="text" id="input-editar-tel" name="telefono" value="" class="form-control" placeholder="Ingrese telefono" data-validacion-tipo="requerido|min:3" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label>Tipo telefono</label>
+
+
+
+
+            <select class="form-select" id="select-editar-tipo-tel" name="idTipoTel" >
+                <option value="" selected>Elige el tipo de telefono</option>
+                <?php foreach($tipoTelefono as $r):
+                  ?>
+                  <option value="<?php echo $r->idTipo ?>"><?php echo $r->tipoTelefono?></option>
+                <?php endforeach;?>
+
+              </select>
+          </div>
+          <hr />
+        </form>
+
+        <div class="text-center">
+          <button class="btn btn-primary" id="btn-editar-tel">Guardar</button>
+        </div>
+
+
+
+      </div>
+      <div  class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal NUEVO telefono -->
+
+<div class="modal fade example-modal-lg" id="modalFormNuevoTel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xxx modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo telefono </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form id="frm-telefono" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="id" value="" />
+
+          <div class="form-group mb-3">
+            <label>Telefono</label>
+            <input type="text" id="input-tel" name="nombre" value="" class="form-control" placeholder="Ingrese telefono" data-validacion-tipo="requerido|min:3" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label>Tipo telefono</label>
+
+
+
+
+            <select class="form-select" id="select-tipo-tel" >
+                <option value="" selected>Elige el tipo de telefono</option>
+                <?php foreach($tipoTelefono as $r):
+                  ?>
+                  <option value="<?php echo $r->idTipo ?>"><?php echo $r->tipoTelefono?></option>
+                <?php endforeach;?>
+
+              </select>
+          </div>
+          <hr />
+        </form>
+
+        <div class="text-center">
+          <button class="btn btn-primary" id="btn-guardar">Guardar</button>
+        </div>
+
+
+
+      </div>
+      <div  class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+      </div>
+    </div>
+  </div>
 </div>

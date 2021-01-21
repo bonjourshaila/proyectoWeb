@@ -13,6 +13,43 @@ class TrabajadorModelo
     private $fechaNacimiento;
 		private $filtro;
 
+	private $idTrabajador;
+	private $telefono;
+	private $idTipoTelefono;
+	private $idTelefono;
+
+	public function getIdTrabajador() {
+		return $this->idTrabajador;
+	}
+	public function getTelefono() {
+		return $this->telefono;
+	}
+	public function getIdTipoTelefono() {
+		return $this->idTipoTelefono;
+	}
+
+
+		public function setIdTrabajador($idTrabajador=''){
+			$this->idTrabajador=$idTrabajador;
+		}
+		public function setTelefono($telefono=''){
+			$this->telefono=$telefono;
+		}
+		public function setIdTipoTelefono($idTipoTelefono=''){
+			$this->idTipoTelefono=$idTipoTelefono;
+		}
+
+		public function getIdTelefono() {
+			return $this->idTelefono;
+		}
+
+		public function setIdTelefono($idTelefono=''){
+			$this->idTelefono=$idTelefono;
+		}
+
+
+
+
 
 	public function setId($id='') {
 		$this->id=$id;
@@ -250,6 +287,127 @@ class TrabajadorModelo
 			die($e->getMessage());
 		}
 	}
+
+
+	public function ListarTelefonos($id)
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("	SELECT trabajadores.id,
+																						CONCAT(trabajadores.nombre,' ',trabajadores.apellidoPaterno,' ',trabajadores.apellidoMaterno) AS nombre,
+																						telefonos.telefono, telefonos.idTelefono,
+																						(SELECT tipotelefono.tipoTelefono FROM tipotelefono WHERE tipotelefono.idTipo = telefonos.idTipoTelefono) AS tipoTEl,
+																						(SELECT tipotelefono.idTipo FROM tipotelefono WHERE tipotelefono.idTipo = telefonos.idTipoTelefono) AS idTipoTel
+																						FROM trabajadores JOIN telefonos ON trabajadores.id = telefonos.idTrabajador WHERE trabajadores.id = $id ");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	public function ObtenerTel($idTelefono)
+	{
+		try
+		{
+			$stm = $this->pdo
+			          ->prepare("SELECT * FROM trabajadores WHERE idTelefono = ?");
+
+
+			$stm->execute(array($idTelefono));
+			return $stm->fetch(PDO::FETCH_OBJ);
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	public function EliminarTel($idTelefono)
+	{
+		try
+		{
+			$stm = $this->pdo
+			            ->prepare("DELETE FROM trabajadores WHERE idTelefono = ?");
+
+			$stm->execute(array($idTelefono));
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function ActualizarTel($data)
+	{
+		try
+		{
+			$sql = "UPDATE telefonos SET
+						telefono        = ?,
+            idTipoTelefono        = ?
+				    WHERE idTelefono = ? ";
+
+
+			$this->pdo->prepare($sql)
+			     ->execute(
+				    array(
+												$data->telefono,
+                        $data->idTipoTelefono,
+                        $data->idTelefono
+					)
+				);
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function RegistrarTel(TrabajadorModelo $data)
+	{
+		try
+		{
+		$sql = "INSERT INTO telefonos (idTrabajador, telefono, idTipoTelefono)
+		        VALUES (?, ?, ?)";
+
+		$this->pdo->prepare($sql)
+		     ->execute(
+				array(
+          $data->idTrabajador,
+          $data->telefono,
+          $data->idTipoTelefono
+                )
+			);
+		} catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+	public function ListarTipoTel()
+	{
+		try
+		{
+			$result = array();
+
+			$stm = $this->pdo->prepare("SELECT * FROM tipoTelefono");
+			$stm->execute();
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+
+
 
 
 

@@ -13,6 +13,8 @@ class TrabajadorControlador{
 
     public function Index(){
         $datosLista=$this->model->Listar();
+        $tipoTelefono=$this->model->ListarTipoTel();
+
         require_once 'includes/header.php';
         require_once 'TRABAJADORES/vista/trabajadorVista.php';
         require_once 'includes/footer.php';
@@ -95,17 +97,71 @@ public function Guardar() {
 }
 
 
-
 public function Eliminar(){
     $this->model->Eliminar($_REQUEST['id']);
     header('Location: index.php?c=Trabajador&m=Trabajador');
 }
 
 
-public function Cumpleaños(){
 
-    require_once 'includes/header.php';
-    require_once 'TRABAJADORES/vista/trabajadorCumpleañosVista.php';
-    require_once 'includes/footer.php';
+public function ListarTelefonos(){
+  $this->validate->validarValor(
+      [
+          ['nombreCampo' => "id",'tipoValidacion' => 'Entero','requerido' => false,]
+      ]
+  );
+
+  if($this->validate->getStatus()){
+      if (isset($_REQUEST['id'])) {
+          $datosTel=$this->model->ListarTelefonos($_REQUEST['id']);
+          echo json_encode(["status"=>true,"mensaje"=>"Consulta exitosa","datos"=>$datosTel]);
+
+      }else{
+          $datosTel = null;
+          echo json_encode(["status"=>false,"mensaje"=>"No se obtuvo información"]);
+      }
+
+  }else{
+    echo json_encode(["status"=>false,"mensaje"=>"Error de validación"]);
+  }
+
+
 }
+
+
+public function EditarTel() {
+
+    $alm = new TrabajadorModelo();
+
+    $this->validate->validarValor(
+        [
+            ['nombreCampo' => "idTelefono",'tipoValidacion' => 'Entero','requerido' => true],
+            ['nombreCampo' => "telefono",'tipoValidacion' => 'Telefono','requerido' => true],
+            ['nombreCampo' => "idTipoTel",'tipoValidacion' => 'Entero','requerido' => true]
+
+        ]
+    );
+
+    $alm->setTelefono($_REQUEST['telefono']);
+    $alm->setIdTipoTelefono($_REQUEST['idTipoTel']);
+    $alm->setIdTelefono($_REQUEST['idTelefono']);
+
+    if($this->validate->getStatus()){
+
+
+        $this->model->ActualizarTel($alm);
+
+            // header('Location: index.php?c=Trabajador&m=Trabajador');
+        echo json_encode(["status"=>true,"mensaje"=>"Se guardo la información"]);
+    }else{
+           // $this->errorValidacionMensaje();
+        echo json_encode(["status"=>false,"mensaje"=>$this->validate->getMessage()]);
+    }
+
+
+}
+
+
+
+
 }
