@@ -162,6 +162,46 @@ public function EditarTel() {
 }
 
 
+public function NuevoTel() {
+
+    $alm = new TrabajadorModelo();
+
+    $this->validate->validarValor(
+        [
+            ['nombreCampo' => "idTrabajador",'tipoValidacion' => 'Entero','requerido' => true],
+
+            ['nombreCampo' => "telefonoNuevo",'tipoValidacion' => 'Telefono','requerido' => true],
+            ['nombreCampo' => "tipoTelNuevo",'tipoValidacion' => 'Entero','requerido' => true]
+
+        ]
+    );
+
+    $alm->setIdTrabajador($_REQUEST['idTrabajador']);
+    $alm->setTelefono($_REQUEST['telefonoNuevo']);
+    $alm->setIdTipoTelefono($_REQUEST['tipoTelNuevo']);
+
+
+    if($this->validate->getStatus()){
+
+
+        $this->model->RegistrarTel($alm);
+
+            // header('Location: index.php?c=Trabajador&m=Trabajador');
+        echo json_encode(["status"=>true,"mensaje"=>"Se guardo la información"]);
+    }else{
+           // $this->errorValidacionMensaje();
+        echo json_encode(["status"=>false,"mensaje"=>$this->validate->getMessage()]);
+    }
+
+
+}
+
+
+public function EliminarTel(){
+    $this->model->EliminarTel($_REQUEST['id']);
+    header('Location: index.php?c=Trabajador&m=Trabajador');
+}
+
 
 
 }

@@ -32,9 +32,7 @@
               <tr>
                 <th style="width:400px;">Nombre</th>
                 <th>Correo</th>
-                <th>Telefono 1</th>
-                <th>Telefono 2</th>
-                <th style="width:120px;">Nacimiento</th>
+                <th>Nacimiento</th>
                 <th style="width:60px;"></th>
                 <th style="width:60px;"></th>
                 <th style="width:60px;"></th>
@@ -45,8 +43,6 @@
                 <tr>
                   <td><?php echo $r->nombre." ".$r->apellidoPaterno." ".$r->apellidoMaterno ;  ?></td>
                   <td><?php echo $r->correo; ?></td>
-                  <td><?php echo $r->telefono1; ?></td>
-                  <td><?php echo $r->telefono2; ?></td>
                   <td><?php echo $r->fechaNacimiento; ?></td>
                   <td>
 
@@ -88,7 +84,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <a class="btn btn-primary" href="?c=Trabajador&a=EditarAgregar&m=Trabajador">Nuevo telefono</a>
+        <a class="btn btn-primary" onclick="verFormTelNuevo()">Nuevo telefono</a>
         <hr>
         <hr>
         <table class="table table-striped">
@@ -138,7 +134,7 @@
       </div>
       <div class="modal-body">
 
-        <form id="frm-editar-telefono" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
+        <form id="frm-editar-telefono" method="post" enctype="multipart/form-data">
 
 
           <input type="hidden" name="idTelefono" value="" id="hidden-idTel">
@@ -195,12 +191,12 @@
       </div>
       <div class="modal-body">
 
-        <form id="frm-telefono" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="id" value="" />
+        <form id="frm-nuevo-telefono" action="?c=Trabajador&a=Guardar&m=Trabajador" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="idTrabajador" value="" id="hidden-idTrabajador">
 
           <div class="form-group mb-3">
             <label>Telefono</label>
-            <input type="text" id="input-tel" name="nombre" value="" class="form-control" placeholder="Ingrese telefono" data-validacion-tipo="requerido|min:3" />
+            <input type="text" id="input-nuevo-tel" name="telefonoNuevo" value="" class="form-control" placeholder="Ingrese telefono" data-validacion-tipo="requerido|min:3" />
           </div>
 
           <div class="form-group mb-3">
@@ -209,7 +205,7 @@
 
 
 
-            <select class="form-select" id="select-tipo-tel" >
+            <select class="form-select" id="select-nuevo-tipo-tel" name="tipoTelNuevo">
                 <option value="" selected>Elige el tipo de telefono</option>
                 <?php foreach($tipoTelefono as $r):
                   ?>
@@ -222,7 +218,7 @@
         </form>
 
         <div class="text-center">
-          <button class="btn btn-primary" id="btn-guardar">Guardar</button>
+          <button class="btn btn-primary" id="btn-nuevo-tel">Guardar</button>
         </div>
 
 

@@ -334,7 +334,7 @@ class TrabajadorModelo
 		try
 		{
 			$stm = $this->pdo
-			            ->prepare("DELETE FROM trabajadores WHERE idTelefono = ?");
+			            ->prepare("DELETE FROM telefonos WHERE idTelefono = ?");
 
 			$stm->execute(array($idTelefono));
 		} catch (Exception $e)
