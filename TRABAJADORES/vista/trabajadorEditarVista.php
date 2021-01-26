@@ -37,15 +37,15 @@
               <input type="text" name="correo" value="<?= ($alm!==null)?$alm->correo:""; ?>" class="form-control" placeholder="Ingrese su correo electrónico" data-validacion-tipo="requerido|email" />
             </div>
 
-            <div class="form-group mb-3">
+            <!-- <div class="form-group mb-3">
               <label>Telefono 1</label>
-              <input type="number" name="telefono1" value="<?= ($alm!==null)?$alm->telefono1:""; ?>" class="form-control" placeholder="Ingrese su numero telefónico" data-validacion-tipo="requerido|min:10" />
+              <input type="number" name="telefono1" value="< ?= ($alm!==null)?$alm->telefono1:""; ?>" class="form-control" placeholder="Ingrese su numero telefónico" data-validacion-tipo="requerido|min:10" />
             </div>
 
             <div class="form-group mb-3">
               <label>Telefono 2</label>
-              <input type="number" name="telefono2" value="<?= ($alm!==null)?$alm->telefono2:""; ?>" class="form-control" placeholder="Ingrese su numero telefónico" data-validacion-tipo="requerido|min:10" />
-            </div>
+              <input type="number" name="telefono2" value="< ?= ($alm!==null)?$alm->telefono2:""; ?>" class="form-control" placeholder="Ingrese su numero telefónico" data-validacion-tipo="requerido|min:10" />
+            </div> -->
 
             <div class="form-group mb-3">
               <label>Fecha de nacimiento</label>

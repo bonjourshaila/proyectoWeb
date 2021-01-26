@@ -167,8 +167,6 @@ class TrabajadorModelo
 																				apellidoPaterno LIKE '%".$filtro."%' OR
 																				apellidoMaterno LIKE '%".$filtro."%' OR
 																				correo LIKE '%".$filtro."%' OR
-																				telefono1 LIKE '%".$filtro."%' OR
-																				telefono2 LIKE '%".$filtro."%' OR
 																				fechaNacimiento LIKE '%".$filtro."%'");
 			$stm->execute();
 
@@ -206,6 +204,11 @@ class TrabajadorModelo
 			            ->prepare("DELETE FROM trabajadores WHERE id = ?");
 
 			$stm->execute(array($id));
+
+			$stm2 = $this->pdo
+			            ->prepare("DELETE FROM telefonos WHERE idTrabajador = ?");
+
+			$stm2->execute(array($id));
 		} catch (Exception $e)
 		{
 			die($e->getMessage());
@@ -221,8 +224,6 @@ class TrabajadorModelo
 						apellidoPaterno        = ?,
             apellidoMaterno        = ?,
             correo        = ?,
-						telefono1            = ?,
-            telefono2            = ?,
 						fechaNacimiento = ?
 				    WHERE id = ?";
 
@@ -233,8 +234,6 @@ class TrabajadorModelo
 												$data->apellidoPaterno,
                         $data->apellidoMaterno,
                         $data->correo,
-                        $data->telefono1,
-                        $data->telefono2,
                         $data->fechaNacimiento,
                         $data->id
 					)
@@ -249,8 +248,8 @@ class TrabajadorModelo
 	{
 		try
 		{
-		$sql = "INSERT INTO trabajadores (nombre, apellidoPaterno, apellidoMaterno, correo, telefono1, telefono2, fechaNacimiento)
-		        VALUES (?, ?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO trabajadores (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento)
+		        VALUES (?, ?, ?, ?, ?)";
 
 		$this->pdo->prepare($sql)
 		     ->execute(
@@ -259,8 +258,6 @@ class TrabajadorModelo
           $data->apellidoPaterno,
           $data->apellidoMaterno,
           $data->correo,
-          $data->telefono1,
-          $data->telefono2,
           $data->fechaNacimiento
                 )
 			);

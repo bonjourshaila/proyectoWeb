@@ -65,8 +65,6 @@ public function Guardar() {
             ['nombreCampo' => "apellidoPaterno",'tipoValidacion' => 'Nombre','requerido' => true],
             ['nombreCampo' => "apellidoMaterno",'tipoValidacion' => 'Nombre','requerido' => true],
             ['nombreCampo' => "correo",'tipoValidacion' => 'Email','requerido' => true],
-            ['nombreCampo' => "telefono1",'tipoValidacion' => 'Telefono','requerido' => true],
-            ['nombreCampo' => "telefono2",'tipoValidacion' => 'Telefono','requerido' => false],
             ['nombreCampo' => "fechaNacimiento",'tipoValidacion' => 'Fecha','requerido' => true],
         ]
     );
@@ -76,8 +74,6 @@ public function Guardar() {
     $alm->setApellidoPaterno($_REQUEST['apellidoPaterno']);
     $alm->setApellidoMaterno($_REQUEST['apellidoMaterno']);
     $alm->setCorreo($_REQUEST['correo']);
-    $alm->setTelefono1($_REQUEST['telefono1']);
-    $alm->setTelefono2($_REQUEST['telefono2']);
     $alm->setFechaNacimiento($_REQUEST['fechaNacimiento']);
 
     if($this->validate->getStatus()){
@@ -99,6 +95,7 @@ public function Guardar() {
 
 public function Eliminar(){
     $this->model->Eliminar($_REQUEST['id']);
+    
     header('Location: index.php?c=Trabajador&m=Trabajador');
 }
 
